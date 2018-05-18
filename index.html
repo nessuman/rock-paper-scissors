@@ -2,22 +2,71 @@
 <html>
 
   <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
-    <script src="main.js"></script>
-
+    <meta charset="utf-8">
     <title>Page Title</title>
   </head>
 
   <body>
     <script>
+      function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+
       let options = ["rock", "paper", "scissors"];
 
       function computerPlay() {
         let randomIdx = Math.floor(Math.random()*options.length);
         let computerPick = options[randomIdx];
+        return computerPick;
       }
 
+      function playRound(playerSelection, computerSelection) {
+        playerSelection = playerSelection.toLowerCase();
+        computerSelection = computerSelection.toLowerCase();
+
+        let roundResult;
+        let roundResultText
+
+        switch (playerSelection) {
+          case 'rock':
+            if (computerSelection === "paper") {
+              roundResult = "You Lose";
+            } else if (computerSelection === "scissors") {
+              roundResult = "You Win";
+            } else {
+              return "It's a tie!";
+            }
+            break;
+          case 'paper':
+            if (computerSelection === "scissors") {
+              roundResult = "You Lose";
+            } else if (computerSelection === "rock") {
+              roundResult = "You Win";
+            } else {
+              return "It's a tie!";
+            }
+            break;
+          case 'scissors':
+            if (computerSelection === "rock") {
+              roundResult = "You Lose";
+            } else if (computerSelection === "paper") {
+              roundResult = "You Win";
+            } else {
+              return "It's a tie!";
+            }
+            break;
+          default:
+            return "Do you know how to play this game? Try again!"
+        }
+
+        roundResultText = `${roundResult}! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
+
+        return roundResultText;
+      }
+
+      const playerSelection = 'paper';
+      const computerSelection = computerPlay();
+      console.log(computerSelection + ": " + playRound(playerSelection, computerSelection));
     </script>
   </body>
 
