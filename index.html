@@ -25,48 +25,84 @@
         computerSelection = computerSelection.toLowerCase();
 
         let roundResult;
-        let roundResultText
+        let roundResultText;
 
         switch (playerSelection) {
           case 'rock':
             if (computerSelection === "paper") {
-              roundResult = "You Lose";
+              roundResult = -1;
+              roundResultText = "You Lose!";
             } else if (computerSelection === "scissors") {
-              roundResult = "You Win";
+              roundResult = 1;
+              roundResultText = "You Win!";
             } else {
-              return "It's a tie!";
+              roundResult = 0;
+              roundResultText = "It's a tie!"
             }
             break;
           case 'paper':
             if (computerSelection === "scissors") {
-              roundResult = "You Lose";
+              roundResult = -1;
+              roundResultText = "You Lose!";
             } else if (computerSelection === "rock") {
-              roundResult = "You Win";
+              roundResult = 1;
+              roundResultText = "You Win!";
             } else {
-              return "It's a tie!";
+              roundResult = 0;
+              roundResultText = "It's a tie!"
             }
             break;
           case 'scissors':
             if (computerSelection === "rock") {
-              roundResult = "You Lose";
+              roundResult = -1;
+              roundResultText = "You Lose!";
             } else if (computerSelection === "paper") {
-              roundResult = "You Win";
+              roundResult = 1;
+              roundResultText = "You Win!";
             } else {
-              return "It's a tie!";
+              roundResult = 0;
+              roundResultText = "It's a tie!"
             }
             break;
           default:
-            return "Do you know how to play this game? Try again!"
+            alert("Do you know how to play this game? Try again!");
         }
 
-        roundResultText = `${roundResult}! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
+        if (roundResult != 0) {
+          roundResultText = `${roundResultText} ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
+        }
 
-        return roundResultText;
+        alert(roundResultText);
+
+        return roundResult;
+
       }
 
-      const playerSelection = 'paper';
-      const computerSelection = computerPlay();
-      console.log(computerSelection + ": " + playRound(playerSelection, computerSelection));
+      function game() {
+        let winCount = 0;
+        let numReps = 5;
+
+        var i = 0;
+        while (i < numReps) {
+          let playerSelection = prompt("Rock, Paper, Scissors?");
+          let computerSelection = computerPlay();
+
+          winCount += playRound(playerSelection, computerSelection);
+
+          i++;
+        }
+
+        finalText = `The final score is ${winCount}/${numReps}.`;
+        if (winCount >= 3) {
+          finalText += `You won!`;
+        } else {
+          finalText += `You lost!`;
+        }
+        alert(finalText);
+        return winCount;
+      }
+
+      console.log(game());
     </script>
   </body>
 
