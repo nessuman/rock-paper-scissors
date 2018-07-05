@@ -43,9 +43,9 @@ def playRound(computerSelection, playerSelection):
     roundResult = isWinner(computerSelection, playerSelection)
 
     if roundResult == 1:
-        roundResultText = "You Win! " + playerSelection.capitalize() + " beats " + computerSelection.capitalize()
+        roundResultText = "You Win! {player} beats {computer}.".format(player=playerSelection.capitalize(), computer=computerSelection.capitalize())
     elif roundResult == -1:
-        roundResultText = "You Lose! " + computerSelection.capitalize() + " beats " + playerSelection.capitalize()
+        roundResultText = "You Lose! {computer} beats {player}.".format(player=playerSelection.capitalize(), computer=computerSelection.capitalize())
     elif roundResult == 0:
         roundResultText = "It's a tie!"
 
@@ -60,7 +60,7 @@ def game():
         result = None
         while result == None:
 
-            playerSelection = input("Rock, Paper, Scissors? ")
+            playerSelection = input("Rock, Paper, Scissors?: ")
             computerSelection = computerPlay()
 
             result = playRound(computerSelection, playerSelection)
@@ -68,7 +68,7 @@ def game():
         if result == 1:
             winCount += result
 
-    finalText = "The final score is " + str(winCount) + "/" + str(numReps) + "."
+    finalText = "The final score is {winCount}/{numReps}.".format(winCount=winCount, numReps=numReps)
 
     if winCount >= (numReps/2):
         finalText += " You won!"
